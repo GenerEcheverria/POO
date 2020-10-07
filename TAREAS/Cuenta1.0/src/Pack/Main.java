@@ -1,5 +1,4 @@
-
-package pack;
+package Pack;
 
 import java.util.Scanner;
 
@@ -11,7 +10,7 @@ public class Main {
         Scanner s = new Scanner(System.in);
         int saldo;
         int numeroCuenta;
-        String descripcion
+        String descripcion;
         
         System.out.println("Escribe el saldo:");
         saldo = Integer.parseInt(s.nextLine());
@@ -20,8 +19,7 @@ public class Main {
         System.out.println("Descripcion");
         descripcion = s.nextLine();
         Saldo saldo1= new Saldo(saldo, numeroCuenta,descripcion);
-        toString();
-        saldo1.getSaldo();
+        System.out.println(saldo1.toString());
         System.out.println("Cuanto quieres abonar");
         int abono = Integer.parseInt(s.nextLine());
         saldo1.abonar(abono);

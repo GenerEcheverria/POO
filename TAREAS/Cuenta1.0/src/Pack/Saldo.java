@@ -1,5 +1,4 @@
-
-package pack;
+package Pack;
 
 
 public class Saldo {
@@ -9,7 +8,7 @@ public class Saldo {
 
     public Saldo(int saldo, int numeroCuenta, String descripcion) {
         this.saldo = saldo;
-        this.numeroCuenta = numeroCuenta
+        this.numeroCuenta = numeroCuenta;
         this.descripcion = descripcion;
     }
 
@@ -43,7 +42,7 @@ public class Saldo {
 
     @Override
     public String toString() {
-        return "Saldo{" + "saldo=" + getSaldo() + ", numeroCuenta=" + getNumeroCuenta() + ", descripcion=" + getDescripcion() + '}';
+        return "Saldo: $" + getSaldo() + "\nNumero de cuenta: " + getNumeroCuenta() + "\nDescripcion: " + getDescripcion();
     }
     
     
