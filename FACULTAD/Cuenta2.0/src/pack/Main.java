@@ -22,7 +22,6 @@ public class Main {
         int opcion1;
         
         do {
-            
             System.out.println("Selecciona una opcion");
             System.out.println("1. Nueva cuenta");
             System.out.println("2. Escoger cuenta");
@@ -36,12 +35,9 @@ public class Main {
                    System.out.println("NO HAY DATOS REGISTRADOS");
                } else {
                    ModCuenta();
-               }
-               
+               }               
             }
-        }while (opcion1!=3);
-        
-                     
+        }while (opcion1!=3);                     
     }
     
     public static void AgregarCuenta(){
