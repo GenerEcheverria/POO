@@ -5,12 +5,13 @@ package pack;
 public class DiaAnio {
     private int dia;
     private int mes;
-    private int anio;
+    
 
-    public DiaAnio(int dia, int mes, int anio) {
-        this.dia = dia;
+    public DiaAnio(int dia, int mes) {
+        setDia(dia);
+        setMes(mes);
         this.mes = mes;
-        this.anio = anio;
+        
     }
 
     public int getDia() {
@@ -18,7 +19,12 @@ public class DiaAnio {
     }
 
     public void setDia(int dia) {
-        this.dia = dia;
+        if(dia>0&&dia<32){
+            this.dia = dia;
+        } else {
+            this.dia = 1;
+        }
+        
     }
 
     public int getMes() {
@@ -26,19 +32,16 @@ public class DiaAnio {
     }
 
     public void setMes(int mes) {
-        this.mes = mes;
+        if(mes>0&&mes<13){
+            this.mes = mes;
+        } else {
+            this.mes = 1;
+        }
     }
 
-    public int getAnio() {
-        return anio;
-    }
-
-    public void setAnio(int anio) {
-        this.anio = anio;
-    }
     
-    public boolean igual(int dia, int mes){
-        return this.dia==dia && this.mes==mes;        
+    public boolean igual(DiaAnio fecha){
+        return this.dia==fecha.getDia() && this.mes==fecha.getMes();        
     }
     
     public void visualizar(boolean result){
