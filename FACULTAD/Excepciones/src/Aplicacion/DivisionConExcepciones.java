@@ -5,6 +5,8 @@
  */
 package Aplicacion;
 
+import Modelo.MenorCeroException;
+
 import java.util.Scanner;
 
 
@@ -25,10 +27,12 @@ public class DivisionConExcepciones {
             try{
                 Scanner scan = new Scanner(System.in);
                 System.out.println("Numerador: ");
-                int num = Integer.parseInt(scan.nextLine());
+                int num = Integer.parseInt(scan.nextLine());//Lanzamiento de exc
                 System.out.println("Denominador: ");
-                int den = Integer.parseInt(scan.nextLine());
-
+                int den = Integer.parseInt(scan.nextLine());//Lanzamiento de exc
+                if (den<0){
+                   throw new MenorCeroException("El denominador no puede ser menor a 0"); //Posible lanzamiento de exc
+                }
                 int res = cociente(num,den);
                 System.out.println("Resultado: " + res);
                 continuacion = false;
@@ -38,6 +42,13 @@ public class DivisionConExcepciones {
             }
             catch(ArithmeticException e2) {
                 System.out.println("Debe escribir un número diferente de cero.");
+            }
+            catch(MenorCeroException e3){
+                System.out.println(e3.getMessage());
+                //e3.printStackTrace();
+            }
+            finally {
+                System.out.println("Liberando recursos...");
             }
             
         }while (continuacion);
