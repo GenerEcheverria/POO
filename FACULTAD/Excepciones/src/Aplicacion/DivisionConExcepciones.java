@@ -7,52 +7,106 @@ package Aplicacion;
 
 import Modelo.MenorCeroException;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
 public class DivisionConExcepciones {
-    
-    //throw nos permite lanzar una excepción propia.
-    //throws permite lanzar un método. Por tanto tiene que ir declarada en el método.
-    public static int cociente (int numerador, int denominador) 
-    throws ArithmeticException 
+
+    public static int cociente(int numerador, int denominador)
+            throws ArithmeticException
     {
-        return numerador/denominador;
+        return numerador/denominador; // Punto de lanzamiento de Exc
     }
-    
+
     public static void main(String[] args) {
-        boolean continuacion = true;
         // TODO code application logic here
-        do {
+
+        Scanner entradaInt = new Scanner(System.in);
+        int resultado = 0;
+        boolean continuar = true;
+        //ArrayList listaErrores = new ArrayList();
+        ArrayList<ArrayList<Object>> listaErrores = new ArrayList<ArrayList<Object>>();
+        do{
             try{
-                Scanner scan = new Scanner(System.in);
-                System.out.println("Numerador: ");
-                int num = Integer.parseInt(scan.nextLine());//Lanzamiento de exc
-                System.out.println("Denominador: ");
-                int den = Integer.parseInt(scan.nextLine());//Lanzamiento de exc
-                if (den<0){
-                   throw new MenorCeroException("El denominador no puede ser menor a 0"); //Posible lanzamiento de exc
+                System.out.println("Escriba un numerador: ");
+                int numerador = entradaInt.nextInt(); // Punto de lanzamiento de Exc
+
+                System.out.println("Escriba un denominador: ");
+                int denominador = entradaInt.nextInt(); // Punto de lanzamiento de Exc
+
+                if(denominador <0)
+                {
+                    throw new MenorCeroException("El denominador no puede ser menor a cero"); //Aquí sería un posible punto de lanzamiento de Exc
                 }
-                int res = cociente(num,den);
-                System.out.println("Resultado: " + res);
-                continuacion = false;
+
+                resultado = cociente(numerador, denominador); // Punto de lanzamiento de Exc
+                continuar = false;
             }
-            catch(NumberFormatException e1) {
-                System.out.println("Debe escribir un número entero.");
+            catch(InputMismatchException excep1){
+                System.out.println("Debe escribir un número");
+                StackTraceElement[] lista1 = excep1.getStackTrace();
+                ArrayList filas = new ArrayList();
+                for(int i=0; i <lista1.length; i++){
+                    filas.add(lista1[i].getClassName());
+                    filas.add(lista1[i].getFileName());
+                    filas.add(lista1[i].getMethodName());
+                    filas.add(lista1[i].getLineNumber());
+                }
+                listaErrores.add(filas);
+
+
+                entradaInt.nextLine();
             }
-            catch(ArithmeticException e2) {
-                System.out.println("Debe escribir un número diferente de cero.");
+            catch(ArithmeticException excep2){
+                //excep2.printStackTrace();
+                //System.out.println(excep2.);
+                System.out.println("El denominador no puede ser cero");
+                StackTraceElement[] lista1 = excep2.getStackTrace();
+                ArrayList filas = new ArrayList();
+                for(int i=0; i <lista1.length; i++){
+                    filas.add(lista1[i].getClassName());
+                    filas.add(lista1[i].getFileName());
+                    filas.add(lista1[i].getMethodName());
+                    filas.add(lista1[i].getLineNumber());
+                }
+                listaErrores.add(filas);
+
             }
-            catch(MenorCeroException e3){
-                System.out.println(e3.getMessage());
-                //e3.printStackTrace();
+            catch(MenorCeroException excep3){
+                System.out.println(excep3.getMessage());
+                StackTraceElement[] lista1 = excep3.getStackTrace();
+                ArrayList filas = new ArrayList();
+                for(int i=0; i <lista1.length; i++){
+                    filas.add(lista1[i].getClassName());
+                    filas.add(lista1[i].getFileName());
+                    filas.add(lista1[i].getMethodName());
+                    filas.add(lista1[i].getLineNumber());
+                }
+                listaErrores.add(filas);
             }
-            finally {
-                System.out.println("Liberando recursos...");
+
+        }
+        while(continuar);
+
+        System.out.println("El resultado de la división es: " + resultado);
+
+
+        System.out.println("Clase \t\t\t\t\t Archivo \t\t\t\t Métodos \t\t\t Línea");
+
+        for(int i=0; i <listaErrores.size(); i++){
+            System.out.println("\n");
+            for(int j=0; j< listaErrores.get(i).size(); j++){
+                System.out.print(listaErrores.get(i).get(j) + "\t\t\t");
             }
-            
-        }while (continuacion);
-        
+            System.out.println("\n");
+            //System.out.println(listaErrores[i].getClassName() + "\t\t" + listaErrores[i].getFileName()
+            //+ "\t\t" + listaErrores[i].getMethodName() + "\t\t\t" + listaErrores[i].getLineNumber());
+        }
+
+
+
     }
-    
+
 }

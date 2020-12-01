@@ -39,11 +39,11 @@ public class Ventana extends JFrame{
     private void iniciarComponente(){
         colocarPaneles();
         //colocarEtiquetas();
-        //colocarBotones();
+        colocarBotones();
         //colocarRadioBotones();
         //colocarCajasDeTexto();
         //colocarAreaTexto();
-        colocarListaDesplegable();
+        //colocarListaDesplegable();
     }
     
     private void colocarPaneles(){
@@ -98,7 +98,7 @@ public class Ventana extends JFrame{
         JButton boton2 = new JButton();
         boton2.setBounds(100,200,100,100);
         boton2.setBackground(Color.gray); //Color de fondo del boton
-        ImageIcon play = new ImageIcon("play.png");
+        ImageIcon play = new ImageIcon("perro.jpg");
         boton2.setIcon(new ImageIcon(play.getImage().getScaledInstance(boton2.getWidth(),boton2.getHeight(), Image.SCALE_SMOOTH)));
         panel.add(boton2);
     }
